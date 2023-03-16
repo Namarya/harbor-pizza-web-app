@@ -25,7 +25,7 @@ export default function Registerscreen() {
     const nameRegex = /^[a-zA-Z\s]+$/;
     const emailRegex = /^\S+@\S+\.\S+$/;
     const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$/;
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{12,}$/;
     const isValidName = nameRegex.test(name);
     const isValidEmail = emailRegex.test(email);
     const isValidPassword = passwordRegex.test(password);
