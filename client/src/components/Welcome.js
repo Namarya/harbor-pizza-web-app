@@ -15,7 +15,7 @@ export default function Welcome() {
             pride ourselves on offering the freshest, most delicious pizzas
             around. Our hand-tossed crust is crispy and golden, our toppings are
             always fresh and flavorful, and our tangy tomato sauce is the
-            perfect complement to every bite.So why settle for ordinary pizza
+            perfect complement to every bite. So why settle for ordinary pizza
             when you can experience the unbeatable taste and quality of Harbor
             Pizza? Stop by today and taste the difference for yourself!
           </p>
