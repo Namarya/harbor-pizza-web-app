@@ -1,0 +1,26 @@
+{
+  "name": "harbor-pizza",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "author": "Arya Namiranian",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-sslify": "^1.2.0",
+    "mongoose": "^6.10.0",
+    "router": "^1.3.8",
+    "stripe": "^11.12.0",
+    "uuid": "^9.0.0"
+  }
+}

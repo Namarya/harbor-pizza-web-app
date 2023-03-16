@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+html{
+  overflow-x: hidden !important;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat', sans-serif !important;
+  overflow-x: hidden !important;
+  background-color: #fff !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar-brand{
+  color: #979797 !important;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+.navbar-brand:hover, .nav-link:hover{
+  color: #fff !important;
+}
+.nav-item{
+  font-weight: 600 !important;
+}
+h1{
+  font-size: 1.3rem !important;
+}
+img{
+  border-radius: 7px !important;
+}
+.flex-container{
+  display: flex !important;
+}
+.btn{
+  background-color: #a72222 !important;
+  color: white !important;
+  transition: color, background-color .2s !important;
+  border: solid 1px black !important;
+}
+.btn:hover{
+  color: #a72222 !important;
+  background-color: #fff !important;
+}
+select{
+  box-shadow: none !important;
+  border-color: black !important;
+}
+.fa-plus{
+  color: green;
+  margin: 5px;
+}
+.fa-minus, .fa-trash{
+  color: red;
+  margin: 5px;
+}
+input{
+  margin-top: 10px !important;
+  box-shadow: none !important;
+}
+.dropdown-toggle{
+  color:#979797;
+  transition: color .2s;
+}
+.dropdown-toggle:hover{
+  color: #fff;
+}
+i:hover{
+  cursor: pointer !important;
+}
+.link{
+  text-decoration: none !important;
+  color: #ffffff;
+  transition: color, .2s !important;
+}
+
+.link:hover{
+  text-decoration: underline !important;
+}
+
+
+@media only screen and (max-width:480px){
+  .orderBtn{
+    margin: 1rem !important;
+  }
+
+}
+@media only screen and (max-width:922px){
+  .business-hours{
+    margin-top: 1rem !important;
+  }
+}
+
