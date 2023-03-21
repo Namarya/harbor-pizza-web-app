@@ -55,13 +55,19 @@ router.post("/getuserorders", async (req, res) => {
   }
 });
 
-router.get("/getallorders", async (req, res) => {
-  try {
-    const orders = await Order.find({}).sort({ _id: -1 });
-    res.send(orders);
-  } catch (error) {
-    return res.status(400).json({ message: "Something went wrong" + error });
+router.post("/getallorders", async (req, res) => {
+  const { userid } = req.body;
+  if(userid === process.env.ADMIN_ID){
+    try {
+      const orders = await Order.find({}).sort({ _id: -1 });
+      res.send(orders);
+    } catch (error) {
+      return res.status(400).json({ message: "Something went wrong" + error });
+    }
+  }else{
+    return res.status(400).json({ message: "Something went wrong: " + userid });
   }
+  
 });
 
 router.put("/:id/readyForPickup", async (req, res) => {
