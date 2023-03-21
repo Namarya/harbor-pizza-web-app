@@ -65,7 +65,7 @@ router.post("/getallorders", async (req, res) => {
       return res.status(400).json({ message: "Something went wrong" + error });
     }
   }else{
-    return res.status(400).json({ message: "Something went wrong: " + userid });
+    return res.status(400).json({ message: "Hold your horses buckaroo 🤠. You're not an authorized user!" });
   }
   
 });
