@@ -11,7 +11,6 @@ export default function Dashboard() {
   const userstate = useSelector((state) => state.loginUserReducer);
   const { currentUser } = userstate;
   const { loading, error, orders } = orderstate;
-  
 
   useEffect(() => {
     if (localStorage.getItem("currentUser") === null || !currentUser.isAdmin) {
@@ -39,7 +38,7 @@ export default function Dashboard() {
       >
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
-        {orders && <Orders orders = {orders}/>}
+        {orders && <Orders orders={orders} />}
       </div>
     </div>
   );
