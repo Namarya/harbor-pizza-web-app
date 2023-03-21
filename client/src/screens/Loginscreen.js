@@ -23,7 +23,7 @@ export default function Loginscreen() {
     // Validate and sanitize user input
     const emailRegex = /^\S+@\S+\.\S+$/;
     const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{12,}$/;
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/;
     const validEmail = emailRegex.test(email);
     const validPassword = passwordRegex.test(password);
 
