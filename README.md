@@ -7,9 +7,9 @@
 * View Order Progress
 * Create an Account / Login
 * View Past Orders  
+* Get Email Notifications 
 
 ## Future Plans
-* Get Email / Text Notifications Regarding Order Status
 * Mobile App for IOS and Android
-### [Check it out](https://harborpizza.herokuapp.com/)
+### [Check it out](https://www.harborpizza.app/)
 
