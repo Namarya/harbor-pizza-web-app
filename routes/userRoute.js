@@ -26,9 +26,9 @@ function sendRegistrationEmail(user) {
       html: `
 
       <h2>Dear ${capitalize(user.name)},</h2>
-      <p>Thank you for registering! Use <b>${
+      <p>Thank you for registering! Use ${
         user.email
-      }<b/> and your <b>password</b> to login at <a href="https://www.harborpizza.app/login">harborpizza.app</a>.</p> 
+      } and your <b>password</b> to login at <a href="https://www.harborpizza.app/login">harborpizza.app</a>.</p> 
       <br> 
       <br>  
       <div>
