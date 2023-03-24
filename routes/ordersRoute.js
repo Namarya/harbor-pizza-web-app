@@ -4,6 +4,136 @@ const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const Order = require("../models/orderModel");
+const nodeMailer = require("nodemailer");
+
+function capitalize(s) {
+  return s[0].toUpperCase() + s.slice(1);
+}
+
+// Send user an email that i have received their order with their order number 
+function orderConfirmationEmail(order, cartItems, user) {
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
+  var date = new Date();
+  var pstDate = date.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  });
+  const orderamount = order.orderAmount;
+
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: order.email,
+      subject: `Order Confirmation (${capitalize(ordernumber)})`,
+      html: `
+
+      <h2>Dear ${capitalize(user.name)},</h2>
+      <p>Thank you for your recent order at harborpizza.app! You will receive an email once your order is ready.</p> 
+      <hr>   
+      <div>
+        <div>
+          <h3>Order Details</h3>
+          <div>Order #: <b>${ordernumber}</b></div>
+          <div>Date Ordered: ${pstDate} (Pacific Standard Time)</div>
+          <div>Amount Paid: $${(orderamount / 100).toFixed(2)}</div>
+        </div>
+        <br>
+        <div style="display:flex; justify-content:space-evenly;">
+          <div><b>Items</b>${cartItems
+            .map((item) => {
+              return `<div>${capitalize(item.name.toLowerCase())}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Qty</b>${cartItems
+            .map((item) => {
+              return `<div>${item.quantity}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${cartItems
+            .map((item) => {
+              return `<div>$${item.price}</div>`;
+            })
+            .join("")}
+          </div>             
+        </div>
+        <br>
+        <hr>  
+        <div>
+            <h2>Thank you!</h2>
+            <div><b>Harbor Pizza</b></div>
+            <div>13917 Harbor Blvd, Garden Grove, CA 92843</div>
+            <div>(714)554-0084</div>
+        </div>
+      </div>
+
+      `,
+    });
+
+    console.log("Message Sent: " + info.messageId);
+  }
+
+  main().catch((e) => console.log(e));
+}
+
+// Send user an email that their order is ready for pick up 
+function orderReadyEmail(order){
+
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
+  
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: order.email,
+      subject: `Order Is Ready! (${capitalize(ordernumber)})`,
+      html: `
+
+      <h2>Dear Customer,</h2>
+      <p>Thank you for ordering at harborpizza.app! Order <b>${ordernumber}</b> is now ready for pickup!</p>
+
+      <br>
+      <br>
+        <div>
+            <h2>Thank you!</h2>
+            <div><b>Harbor Pizza</b></div>
+            <div>13917 Harbor Blvd, Garden Grove, CA 92843</div>
+            <div>(714)554-0084</div>
+        </div>
+      </div>
+
+      `,
+    });
+
+    console.log("Message Sent: " + info.messageId);
+  }
+
+  main().catch((e) => console.log(e));
+}
+
+
+/* Routes */
 
 router.post("/placeorder", async (req, res) => {
   const { token, total, currentUser, cartItems } = req.body;
@@ -33,8 +163,9 @@ router.post("/placeorder", async (req, res) => {
         orderAmount: totalAmount,
         transactionId: payment.source.id,
       });
-
       neworder.save();
+
+      orderConfirmationEmail(neworder, cartItems, currentUser);
 
       res.send("Order was placed successfully");
     } else {
@@ -57,17 +188,18 @@ router.post("/getuserorders", async (req, res) => {
 
 router.post("/getallorders", async (req, res) => {
   const { userid } = req.body;
-  if(userid === process.env.ADMIN_ID){
+  if (userid === process.env.ADMIN_ID) {
     try {
       const orders = await Order.find({}).sort({ _id: -1 });
       res.send(orders);
     } catch (error) {
       return res.status(400).json({ message: "Something went wrong" + error });
     }
-  }else{
-    return res.status(400).json({ message: "Hold your horses buckaroo 🤠. You're not an authorized user!" });
+  } else {
+    return res.status(400).json({
+      message: "Hold your horses buckaroo 🤠. You're not an authorized user!",
+    });
   }
-  
 });
 
 router.put("/:id/readyForPickup", async (req, res) => {
@@ -76,6 +208,9 @@ router.put("/:id/readyForPickup", async (req, res) => {
   if (order) {
     order.readyForPickup = true;
     const updatedOrder = await order.save();
+
+    orderReadyEmail(updatedOrder);
+
     res.send({
       message: "Order marked as ready for pickup",
       order: updatedOrder,
