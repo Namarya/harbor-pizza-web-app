@@ -117,7 +117,7 @@ export default function Orderscreen() {
                         Order Details
                       </h2>
                       <div style={{ textAlign: "start", marginLeft: "1rem" }}>
-                        <p className="m-0">Order #: <b>{order._id.substring(order._id.length-10)}</b></p>
+                        <p className="m-0">Order #: <b>{order._id.substring(order._id.length-10).toUpperCase()}</b></p>
                         <p className="m-0">
                           Order Date: {getPST(order.createdAt)}
                         </p>
@@ -129,7 +129,7 @@ export default function Orderscreen() {
                           Order Status:{" "}
                           {order.readyForPickup ? (
                             <span>
-                              Ready! <i class="fa-solid fa-square-check"></i>
+                              Ready <i class="fa-solid fa-square-check"></i>
                             </span>
                           ) : (
                             <span>

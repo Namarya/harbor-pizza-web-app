@@ -37,10 +37,12 @@ export const getUserOrders = () => async (dispatch, getState)=>{
 
 export const getAllOrders = () => async (dispatch, getState)=>{
 
+    const currentUser = getState().loginUserReducer.currentUser
+
     dispatch({type: 'GET_ALL_ORDERS_REQUEST'})
 
     try{
-        const response = await axiosIsntance.get('/api/orders/getallorders')
+        const response = await axiosIsntance.post('/api/orders/getallorders', {userid : currentUser._id})
         // console.log(response)
         dispatch({type:'GET_ALL_ORDERS_SUCCESS', payload : response.data})
     }catch(error){

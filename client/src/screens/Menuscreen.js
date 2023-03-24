@@ -14,7 +14,7 @@ export default function Menuscreen() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div id="top">
       <div
         className=" d-flex justify-content-center"
         style={{ marginTop: "5rem" }}
@@ -37,7 +37,7 @@ export default function Menuscreen() {
           )}
         </div>
       </div>
-      
+      <a href="#top"><div id="gtt" className=" d-none position-fixed bottom-0 end-0 mx-3 mb-5 rounded-circle bg-white" style={{width: "2rem", height: "2rem", placeItems: "center"}}><i className="fa-solid fa-angle-up" style={{color:"#000"}}></i></div></a>
     </div>
   );
 }

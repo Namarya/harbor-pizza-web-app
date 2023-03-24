@@ -99,7 +99,7 @@ export default function Orders({ orders }) {
                 <div style={{ textAlign: "start", marginLeft: "1rem" }}>
                   <p className="m-0">
                     Order #:{" "}
-                    <b>{order._id.substring(order._id.length - 10)}</b>
+                    <b>{order._id.substring(order._id.length - 10).toUpperCase()}</b>
                   </p>
                   <p className="m-0">Customer Email: {order.email}</p>
                   <p className="m-0">
@@ -114,7 +114,7 @@ export default function Orders({ orders }) {
                     Order Status:{" "}
                     {order.readyForPickup ? (
                       <span>
-                        Ready! <i className="fa-solid fa-square-check"></i>
+                        Ready <i className="fa-solid fa-square-check"></i>
                       </span>
                     ) : (
                       <span>
