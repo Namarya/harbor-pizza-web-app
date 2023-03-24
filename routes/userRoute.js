@@ -2,6 +2,49 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const nodeMailer = require("nodemailer");
+
+function capitalize(s) {
+  return s[0].toUpperCase() + s.slice(1);
+}
+
+// Send user an email when they are registered successfully
+function sendRegistrationEmail(user) {
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: user.email,
+      subject: `Registration Confirmation`,
+      html: `
+
+      <h2>Dear ${capitalize(user.name)},</h2>
+      <p>Thank you for registering! Use <b>${
+        user.email
+      }<b> and your password to login at harborpizza.app.</p> 
+      <br> 
+      <br>  
+      <div>
+        <h2>Thank you!</h2>
+        <div><b>Harbor Pizza</b></div>
+        <div>13917 Harbor Blvd, Garden Grove, CA 92843</div>
+        <div>(714)554-0084</div>
+      </div>
+      `,
+    });
+
+    console.log("Message Sent: " + info.messageId);
+  }
+
+  main().catch((e) => console.log(e));
+}
 
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
@@ -20,6 +63,8 @@ router.post("/register", async (req, res) => {
     // Create new user with hashed password
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
+
+    sendRegistrationEmail(newUser);
 
     res.send("User Registered Successfully");
   } catch (error) {
