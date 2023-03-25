@@ -11,7 +11,7 @@
 
 ## Future Plans
 * Mobile App for IOS and Android
-* Create Custom Pizza's and Calzone's
-
+* Guest Checkout
+* Pizza / Calzone Builder
 ### [Check it out](https://www.harborpizza.app/)
 

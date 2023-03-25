@@ -63,7 +63,7 @@ function orderConfirmationEmail(order, cartItems, user) {
           </div>
           <div style="margin-left: 1.2rem;"><b>Price</b>${cartItems
             .map((item) => {
-              return `<div>$${item.price}</div>`;
+              return `<div>$${item.price.toFixed(2)}</div>`;
             })
             .join("")}
           </div>             
