@@ -43,7 +43,7 @@ export default function StoreInfo() {
         <hr />
 
         <div className="d-flex justify-content-center align-items-center">
-          <a href="tel:+7145540084" className="d-flex align-items-center text-decoration-none  text-dark">
+          <a href="tel:+17145540084" className="d-flex align-items-center text-decoration-none  text-dark">
           <i className="fa-solid fa-phone me-1"></i>
           (714) 554 - 0084
           </a>
