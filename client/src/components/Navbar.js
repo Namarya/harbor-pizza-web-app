@@ -46,7 +46,11 @@ export default function Navbar() {
                     href="/"
                   >
                     <i className="fa-solid fa-user me-1"></i>
-                    {currentUser.name.indexOf(" ") === -1 ? (currentUser.name.toUpperCase()) : (currentUser.name.substring(0,currentUser.name.indexOf(" ")).toUpperCase())}
+                    {currentUser.name.indexOf(" ") === -1
+                      ? currentUser.name.toUpperCase()
+                      : currentUser.name
+                          .substring(0, currentUser.name.indexOf(" "))
+                          .toUpperCase()}
                   </a>
                   <ul className="dropdown-menu w-max">
                     <li>
@@ -78,7 +82,9 @@ export default function Navbar() {
               <li className="nav-item">
                 <a className="nav-link" href="/cart">
                   <i className="fa-solid fa-cart-shopping me-1"></i>
-                  {cartstate.cartItems.length}
+                  <span className="rounded-circle nav-cart cartitem-amount">
+                    {cartstate.cartItems.length}
+                  </span>
                 </a>
               </li>
             </ul>
@@ -87,5 +93,4 @@ export default function Navbar() {
       </nav>
     </div>
   );
-  
 }

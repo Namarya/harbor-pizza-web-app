@@ -10,7 +10,7 @@ function capitalize(s) {
   return s[0].toUpperCase() + s.slice(1);
 }
 
-// Send user an email that i have received their order with their order number 
+// Send user an email that i have received their order with their order number
 function orderConfirmationEmail(order, cartItems, user) {
   const temp = JSON.stringify(order._id);
   const ordernumber = temp
@@ -87,14 +87,13 @@ function orderConfirmationEmail(order, cartItems, user) {
   main().catch((e) => console.log(e));
 }
 
-// Send user an email that their order is ready for pick up 
-function orderReadyEmail(order){
-
+// Send user an email that their order is ready for pick up
+function orderReadyEmail(order) {
   const temp = JSON.stringify(order._id);
   const ordernumber = temp
     .substring(temp.length - 11, temp.length - 1)
     .toUpperCase();
-  
+
   async function main() {
     const transporter = nodeMailer.createTransport({
       service: "hotmail",
@@ -131,7 +130,6 @@ function orderReadyEmail(order){
 
   main().catch((e) => console.log(e));
 }
-
 
 /* Routes */
 

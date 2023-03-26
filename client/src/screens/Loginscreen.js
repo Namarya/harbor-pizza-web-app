@@ -35,7 +35,7 @@ export default function Loginscreen() {
 
     if (validEmail && validPassword) {
       const user = {
-        email: DOMPurify.sanitize(email),
+        email: DOMPurify.sanitize(email.toLowerCase()),
         password: DOMPurify.sanitize(password),
       };
       dispatch(loginUser(user));

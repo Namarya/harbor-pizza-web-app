@@ -43,7 +43,7 @@ export default function Registerscreen() {
     } else {
       const user = {
         name: DOMPurify.sanitize(name),
-        email: DOMPurify.sanitize(email),
+        email: DOMPurify.sanitize(email.toLowerCase()),
         password: DOMPurify.sanitize(password),
       };
       dispatch(registerUser(user));

@@ -23,7 +23,7 @@ export default function Orderscreen() {
     style: "currency",
     currency: "USD",
   });
-  
+
   useEffect(() => {
     dispatch(getUserOrders());
     setInterval(() => {
@@ -53,7 +53,6 @@ export default function Orderscreen() {
                 <div
                   className="col"
                   style={{
-                    
                     padding: "1rem",
                     margin: "3px",
                     backgroundColor: "#eeeeee",
@@ -117,7 +116,14 @@ export default function Orderscreen() {
                         Order Details
                       </h2>
                       <div style={{ textAlign: "start", marginLeft: "1rem" }}>
-                        <p className="m-0">Order #: <b>{order._id.substring(order._id.length-10).toUpperCase()}</b></p>
+                        <p className="m-0">
+                          Order #:{" "}
+                          <b>
+                            {order._id
+                              .substring(order._id.length - 10)
+                              .toUpperCase()}
+                          </b>
+                        </p>
                         <p className="m-0">
                           Order Date: {getPST(order.createdAt)}
                         </p>

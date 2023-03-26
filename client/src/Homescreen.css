@@ -1,40 +1,30 @@
-body{
-    background-color: #a72222 !important;
+body {
+  background-color: #a72222 !important;
 }
-.bg-img{
-    display: grid;
-    background-size:cover;
-    background-position: center center;
-    background-image: url(./imgs/cover-photo.png);
-    height: 20rem;
-    place-items: center;
-    color: white;
-    
+.bg-img h1 {
+  font-size: 3.5rem !important;
+  font-family: "Roboto Slab", sans-serif;
 }
-.bg-img h1{
-    font-size: 3.5rem !important;
-    font-family: 'Roboto Slab', sans-serif;
+.message {
+  max-width: 90rem;
 }
-.message{
-    max-width: 90rem;
+.message p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.6;
 }
-.message p{
-    font-size: 1.2rem;
-    font-weight: 300;
-    line-height: 1.6;
+.start-order {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 2rem;
+  font-weight: bold;
 }
-.start-order{
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2rem;
-    font-weight: bold;
+.order-container {
+  background-color: rgb(255, 255, 255);
+  color: black;
 }
-.order-container{
-    background-color: rgb(255, 255, 255);
-    color: black;
-}
-.orderBtn{
-    border: solid 2px black !important;
-    outline: none;
-    font-weight: 900;
-    font-size: 1.5rem;
+.orderBtn {
+  border: solid 2px black !important;
+  outline: none;
+  font-weight: 900;
+  font-size: 1.5rem;
 }

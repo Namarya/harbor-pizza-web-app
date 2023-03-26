@@ -1,9 +1,9 @@
 import React from "react";
-import meatlover from '../imgs/Meatlover.jpg'
-import sandwich from '../imgs/parm-sandwich.png'
-import spaghetti from '../imgs/spagetti_meatball.png'
-import supreme from '../imgs/Supreme.jpg' 
-import pepperoni from '../imgs/pep-pizza.png'
+import meatlover from "../imgs/Meatlover.jpg";
+import sandwich from "../imgs/parm-sandwich.png";
+import spaghetti from "../imgs/spagetti_meatball.png";
+import supreme from "../imgs/Supreme.jpg";
+import pepperoni from "../imgs/pep-pizza.png";
 export default function Slideshow() {
   return (
     <div className="d-flex justify-content-center bfbfb">
@@ -11,7 +11,7 @@ export default function Slideshow() {
         id="carouselExampleCaptions"
         className="carousel slide"
         data-bs-ride="carousel"
-        style={{maxWidth:"30rem"}}
+        style={{ maxWidth: "30rem" }}
       >
         <div className="carousel-indicators">
           <button
@@ -70,7 +70,10 @@ export default function Slideshow() {
           data-bs-target="#carouselExampleCaptions"
           data-bs-slide="prev"
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Previous</span>
         </button>
         <button
@@ -79,7 +82,10 @@ export default function Slideshow() {
           data-bs-target="#carouselExampleCaptions"
           data-bs-slide="next"
         >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Next</span>
         </button>
       </div>

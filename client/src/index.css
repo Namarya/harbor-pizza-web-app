@@ -1,109 +1,160 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
 
-html{
+html {
   overflow-x: hidden !important;
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   overflow-x: hidden !important;
   background-color: #fff !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.navbar-brand{
+.navbar-brand {
   color: #979797 !important;
   font-weight: 600;
   transition: color 0.3s;
 }
-.navbar-brand:hover, .nav-link:hover{
+.navbar-brand:hover,
+.nav-link:hover {
   color: #fff !important;
 }
-.nav-item{
+.nav-item {
   font-weight: 600 !important;
 }
-h1{
+h1 {
   font-size: 1.3rem !important;
 }
-img{
+img {
   border-radius: 7px !important;
 }
-.flex-container{
+.flex-container {
   display: flex !important;
 }
-.btn{
+.btn {
   background-color: #a72222 !important;
   color: white !important;
-  transition: color, background-color .2s !important;
+  transition: color, background-color 0.2s !important;
   border: solid 1px black !important;
 }
-.btn:hover{
+.btn:hover {
   color: #a72222 !important;
   background-color: #fff !important;
 }
-select{
+select {
   box-shadow: none !important;
   border-color: black !important;
 }
-.fa-plus{
+.fa-plus {
   color: green;
   margin: 5px;
 }
-.fa-minus, .fa-trash{
+.fa-minus,
+.fa-trash {
   color: red;
   margin: 5px;
 }
-input{
+input {
   margin-top: 10px !important;
   box-shadow: none !important;
 }
-.dropdown-toggle{
-  color:#979797;
-  transition: color .2s;
+.dropdown-toggle {
+  color: #979797;
+  transition: color 0.2s;
 }
-.dropdown-toggle:hover{
+.dropdown-toggle:hover {
   color: #fff;
 }
-i:hover{
+i:hover {
   cursor: pointer !important;
 }
-.link{
+.link {
   text-decoration: none !important;
-  color: #ffffff;
-  transition: color, .2s !important;
+  transition: color, 0.2s !important;
 }
 
-.link:hover{
+.link:hover {
   text-decoration: underline !important;
 }
 
-
-@media only screen and (max-width:480px){
-  .orderBtn{
+.bg-img {
+  display: grid !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-image: url(./imgs/cover-photo.png) !important;
+  height: 20rem !important;
+  place-items: center !important;
+  color: white !important;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #25292d;
+  font-size: 1.5rem;
+  color: #fff;
+  width: 100%;
+}
+.header:hover {
+  cursor: pointer;
+}
+.show-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.hide-items {
+  display: none;
+}
+@media only screen and (max-width: 480px) {
+  .orderBtn {
     margin: 1rem !important;
   }
-
 }
-@media only screen and (max-width:922px){
-  .business-hours{
+@media only screen and (max-width: 922px) {
+  .business-hours {
     margin-top: 1rem !important;
   }
-  #gtt{
+  #gtt {
     display: grid !important;
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none !important;
+}
+.cart-link {
+  color: #212529;
+  text-decoration: none;
+}
+.cart-link:hover {
+  color: #4d555d;
+}
+.cartitem-amount {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.5rem;
+  background-color: #ff0000;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.7rem;
+  color: #fff;
+  z-index: 100;
+}
+.nav-cart {
+  top: 0.7rem;
+  right: 0.9rem;
 }

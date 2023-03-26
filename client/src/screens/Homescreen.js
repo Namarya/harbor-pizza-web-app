@@ -6,11 +6,11 @@ import "../Homescreen.css";
 
 export default function Homescreen() {
   return (
-    <div style={{marginTop: "3rem"}}>
+    <div style={{ marginTop: "3rem" }}>
       <Welcome />
       <div className="d-flex flex-wrap justify-content-evenly align-items-center p-3">
         <Slideshow />
-        <StoreInfo/>
+        <StoreInfo />
       </div>
     </div>
   );
