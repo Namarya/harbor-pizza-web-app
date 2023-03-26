@@ -26,9 +26,9 @@ function sendRegistrationEmail(user) {
       html: `
 
       <h2>Dear ${capitalize(user.name)},</h2>
-      <p>Thank you for registering! Use ${
+      <p>Thank you for registering! Use <b>${
         user.email
-      } and your <b>password</b> to login at <a href="https://www.harborpizza.app/login">harborpizza.app</a>.</p> 
+      }<b/> and your <b>password</b> to login at <a href="https://www.harborpizza.app/login">harborpizza.app</a>.</p> 
       <br> 
       <br>  
       <div>
@@ -37,6 +37,32 @@ function sendRegistrationEmail(user) {
         <div>13917 Harbor Blvd, Garden Grove, CA 92843</div>
         <div>(714)554-0084</div>
       </div>
+      `,
+    });
+
+    console.log("Message Sent: " + info.messageId);
+  }
+
+  main().catch((e) => console.log(e));
+}
+function confirmRegistrationEmail(user) {
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: "harborpizza@outlook.com",
+      subject: `Registration Confirmation`,
+      html: `
+        <h2>WOOHOO!!!! A new user has registered for an account!</h2>
+        <p>Name: <b>${user.name}</b> </p>
+        <p>Email: <b>${user.email}</b></p>
       `,
     });
 
@@ -65,8 +91,10 @@ router.post("/register", async (req, res) => {
     await newUser.save();
 
     sendRegistrationEmail(newUser);
-
     res.send("User Registered Successfully");
+    setTimeout(() => {
+      confirmRegistrationEmail(newUser);
+    }, 1000);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }

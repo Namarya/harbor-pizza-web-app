@@ -131,6 +131,62 @@ function orderReadyEmail(order) {
   main().catch((e) => console.log(e));
 }
 
+function sendOrderEmailUpdate(order, cartItems, user) {
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
+
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: "harborpizza@outlook.com",
+      subject: "New Order!",
+      html: `<h2>Order # ${ordernumber}</h2>
+              <div>
+                <p>Customer Name: ${capitalize(user.name)}</p>
+                <p>Customer Email: ${user.email}</p>
+              </div>
+              <br>
+              <div style="display:flex; justify-content:space-evenly;">
+          <div><b>Items</b>${cartItems
+            .map((item) => {
+              return `<div>${capitalize(item.name.toLowerCase())}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Size</b>${cartItems
+            .map((item) => {
+              return `<div>${item.size}</div>`;
+            })
+            .join("")}
+          </div>  
+          <div style="margin-left: 1.2rem;"><b>Qty</b>${cartItems
+            .map((item) => {
+              return `<div>${item.quantity}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${cartItems
+            .map((item) => {
+              return `<div>$${item.price.toFixed(2)}</div>`;
+            })
+            .join("")}
+          </div>             
+        </div>
+        `,
+    });
+  }
+  main().catch((e) => console.log(e));
+}
+
 /* Routes */
 
 router.post("/placeorder", async (req, res) => {
@@ -164,8 +220,10 @@ router.post("/placeorder", async (req, res) => {
       neworder.save();
 
       orderConfirmationEmail(neworder, cartItems, currentUser);
-
       res.send("Order was placed successfully");
+      setTimeout(() => {
+        sendOrderEmailUpdate(neworder, cartItems, currentUser);
+      }, 1000);
     } else {
       res.send("Payment Failed");
     }

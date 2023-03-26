@@ -80,7 +80,7 @@ export default function Navbar() {
               )}
 
               <li className="nav-item">
-                <a className="nav-link" href="/cart">
+                <a className="nav-link position-relative" href="/cart">
                   <i className="fa-solid fa-cart-shopping me-1"></i>
                   <span className="rounded-circle nav-cart cartitem-amount">
                     {cartstate.cartItems.length}
