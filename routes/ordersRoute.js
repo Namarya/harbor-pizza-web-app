@@ -10,7 +10,7 @@ function capitalize(s) {
   return s[0].toUpperCase() + s.slice(1);
 }
 
-// Send user an email that i have received their order with their order number
+// Send user an email that the order was received and include their order number and details
 function orderConfirmationEmail(order, cartItems, user) {
   const temp = JSON.stringify(order._id);
   const ordernumber = temp
@@ -38,7 +38,84 @@ function orderConfirmationEmail(order, cartItems, user) {
       html: `
 
       <h2>Dear ${capitalize(user.name)},</h2>
-      <p>Thank you for your recent order at harborpizza.app! You will receive an email once your order is ready.</p> 
+      <p>Thank you for your recent order at harborpizza.app! Your order should be ready in 20 to 30 minutes. You will receive an email once your order is ready for pickup.</p> 
+      <hr>   
+      <div>
+        <div>
+          <h3>Order Details</h3>
+          <div>Order #: <b>${ordernumber}</b></div>
+          <div>Date Ordered: ${pstDate} (Pacific Standard Time)</div>
+          <div>Amount Paid: $${(orderamount / 100).toFixed(2)}</div>
+        </div>
+        <br>
+        <div style="display:flex; justify-content:space-evenly;">
+          <div><b>Items</b>${cartItems
+            .map((item) => {
+              return `<div>${capitalize(item.name.toLowerCase())}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Qty</b>${cartItems
+            .map((item) => {
+              return `<div>${item.quantity}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${cartItems
+            .map((item) => {
+              return `<div>$${item.price.toFixed(2)}</div>`;
+            })
+            .join("")}
+          </div>             
+        </div>
+        <br>
+        <hr>  
+        <div>
+            <h2>Thank you!</h2>
+            <div><b>Harbor Pizza</b></div>
+            <div>13917 Harbor Blvd, Garden Grove, CA 92843</div>
+            <div>(714)554-0084</div>
+        </div>
+      </div>
+
+      `,
+    });
+
+    console.log("Message Sent: " + info.messageId);
+  }
+
+  main().catch((e) => console.log(e));
+}
+
+// Send guest an email that the order was received and include their order number and details
+function orderConfirmationGuestEmail(order, cartItems) {
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
+  var date = new Date();
+  var pstDate = date.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  });
+  const orderamount = order.orderAmount;
+
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: order.email,
+      subject: `Order Confirmation (${capitalize(ordernumber)})`,
+      html: `
+
+      <h2>Dear Guest,</h2>
+      <p>Thank you for your recent order at harborpizza.app! Your order should be ready in 20 to 30 minutes. You will receive an email once your order is ready for pickup.</p> 
       <hr>   
       <div>
         <div>
@@ -152,7 +229,7 @@ function sendOrderEmailUpdate(order, cartItems, user) {
       html: `<h2>Order # ${ordernumber}</h2>
               <div>
                 <p>Customer Name: ${capitalize(user.name)}</p>
-                <p>Customer Email: ${user.email}</p>
+                <p>Customer Email: ${order.email}</p>
               </div>
               <br>
               <div style="display:flex; justify-content:space-evenly;">
@@ -187,8 +264,61 @@ function sendOrderEmailUpdate(order, cartItems, user) {
   main().catch((e) => console.log(e));
 }
 
-/* Routes */
+function sendGuestOrderEmailUpdate(order, cartItems) {
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
 
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: "harborpizza@outlook.com",
+      subject: "New Order!",
+      html: `<h2>Order # ${ordernumber}</h2>
+              <div>
+                <p>Customer Email: ${order.email}</p>
+              </div>
+              <br>
+              <div style="display:flex; justify-content:space-evenly;">
+          <div><b>Items</b>${cartItems
+            .map((item) => {
+              return `<div>${capitalize(item.name.toLowerCase())}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Size</b>${cartItems
+            .map((item) => {
+              return `<div>${item.size}</div>`;
+            })
+            .join("")}
+          </div>  
+          <div style="margin-left: 1.2rem;"><b>Qty</b>${cartItems
+            .map((item) => {
+              return `<div>${item.quantity}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${cartItems
+            .map((item) => {
+              return `<div>$${item.price.toFixed(2)}</div>`;
+            })
+            .join("")}
+          </div>             
+        </div>
+        `,
+    });
+  }
+  main().catch((e) => console.log(e));
+}
+/* Routes */
 router.post("/placeorder", async (req, res) => {
   const { token, total, currentUser, cartItems } = req.body;
   var totalAmount = Math.round(total.toFixed(2) * 100);
@@ -223,6 +353,49 @@ router.post("/placeorder", async (req, res) => {
       res.send("Order was placed successfully");
       setTimeout(() => {
         sendOrderEmailUpdate(neworder, cartItems, currentUser);
+      }, 1000);
+    } else {
+      res.send("Payment Failed");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: "Something went wrong" + error });
+  }
+});
+
+router.post("/placeguestorder", async (req, res) => {
+  const { token, total, cartItems } = req.body;
+  var totalAmount = Math.round(total.toFixed(2) * 100);
+  try {
+    const customer = await stripe.customers.create({
+      email: token.email,
+      source: token.id,
+    });
+    const payment = await stripe.charges.create(
+      {
+        amount: totalAmount,
+        currency: "usd",
+        customer: customer.id,
+        receipt_email: token.email,
+      },
+      {
+        idempotencyKey: uuidv4(),
+      }
+    );
+    if (payment) {
+      const neworder = new Order({
+        name: token.name,
+        email: token.email,
+        userid: null,
+        orderItems: cartItems,
+        orderAmount: totalAmount,
+        transactionId: payment.source.id,
+      });
+      neworder.save();
+
+      res.send("Order was placed successfully");
+      orderConfirmationGuestEmail(neworder, cartItems);
+      setTimeout(() => {
+        sendGuestOrderEmailUpdate(neworder, cartItems);
       }, 1000);
     } else {
       res.send("Payment Failed");

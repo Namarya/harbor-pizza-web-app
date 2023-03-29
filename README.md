@@ -10,11 +10,11 @@
 - Create an Account / Login
 - View Past Orders
 - Get Email Notifications
+- Guest Checkout
 
 ## Future Plans
 
 - Mobile App for IOS and Android
-- Guest Checkout
 - Pizza / Calzone Builder
 
 ### [Check it out](https://www.harborpizza.app/)

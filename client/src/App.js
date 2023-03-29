@@ -12,6 +12,7 @@ import Registerscreen from "./screens/Registerscreen";
 import Orderscreen from "./screens/Orderscreen";
 import Footer from "./components/Footer";
 import Dashboard from "./screens/Dashboard";
+import Successscreen from "./screens/Successscreen";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/register" element={<Registerscreen />} />
           <Route path="/orders" element={<Orderscreen />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/success" element={<Successscreen />} />
         </Routes>
       </BrowserRouter>
       <Footer />

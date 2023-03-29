@@ -1,7 +1,7 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import { useDispatch, useSelector } from "react-redux";
-import { placeOrder } from "../actions/orderActions";
+import { placeOrder, placeGuestOrder } from "../actions/orderActions";
 import Success from "./Success";
 import Loading from "./Loading";
 import Error from "./Error";
@@ -17,6 +17,10 @@ export default function Checkout({ total }) {
     // console.log(token)
     dispatch(placeOrder(token, total));
   }
+  function guestTokenHandler(token) {
+    // console.log(token)
+    dispatch(placeGuestOrder(token, total));
+  }
   const handleOrderSuccess = () => {
     setTimeout(() => {
       Promise.resolve()
@@ -24,7 +28,11 @@ export default function Checkout({ total }) {
           localStorage.removeItem("cartItems");
         })
         .then(() => {
-          window.location.href = "/orders";
+          if (currentUser) {
+            window.location.href = "/orders";
+          } else {
+            window.location.href = "/success";
+          }
         });
     }, 1000);
   };
@@ -32,6 +40,7 @@ export default function Checkout({ total }) {
     <div>
       {loading && <Loading />}
       {error && <Error error="Something went wrong" />}
+
       {success && (
         <div>
           <Success success="Your order was placed successfully" />
@@ -51,9 +60,25 @@ export default function Checkout({ total }) {
           <button className="btn">PAY NOW</button>
         </StripeCheckout>
       ) : (
-        <a href="/login">
-          <button className="btn">Login to place an order</button>
-        </a>
+        <div className="d-flex flex-wrap align-items-center gap-3 justify-content-center">
+          <a href="/login">
+            <button className="btn" style={{ width: "15rem" }}>
+              Login
+            </button>
+          </a>
+          <StripeCheckout
+            amount={total * 100}
+            billingAddress
+            shippingAddress
+            token={guestTokenHandler}
+            currency="USD"
+            stripeKey="pk_test_51MW4FAJH9w2Msobec3si6t36Ml126mM4bqwznNuOOu3oGn0lX3j5TNyQSu5w0xg7OV0RZfxRxsmnM7dZrORNiSmZ00DSTizaNt"
+          >
+            <button className="alt-btn rounded" style={{ width: "15rem" }}>
+              Checkout As Guest
+            </button>
+          </StripeCheckout>
+        </div>
       )}
     </div>
   );

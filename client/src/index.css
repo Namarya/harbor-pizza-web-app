@@ -46,13 +46,27 @@ img {
 .btn {
   background-color: #a72222 !important;
   color: white !important;
-  transition: color, background-color 0.2s !important;
+  transition: color, border, background-color 0.2s !important;
   border: solid 1px black !important;
+}
+.alt-btn {
+  background-color: #fff !important;
+  color: #a72222 !important;
+  transition: color, border, background-color 0.2s !important;
+  border: solid 1px #a72222 !important;
+  padding: 6px 12px;
 }
 .btn:hover {
   color: #a72222 !important;
   background-color: #fff !important;
+  border: solid 1px #a72222 !important;
 }
+.alt-btn:hover {
+  color: #ffffff !important;
+  background-color: #a72222 !important;
+  border: solid 1px #000 !important;
+}
+
 select {
   box-shadow: none !important;
   border-color: black !important;
@@ -122,6 +136,9 @@ i:hover {
 @media only screen and (max-width: 480px) {
   .orderBtn {
     margin: 1rem !important;
+  }
+  #thankyou {
+    margin-bottom: 15rem !important;
   }
 }
 @media only screen and (max-width: 922px) {
