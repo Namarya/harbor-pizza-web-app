@@ -31,28 +31,21 @@ export default function Menuscreen() {
                 <div
                   className="header"
                   onClick={() => {
-                    var items = document.getElementById("pizzas");
-                    if (items.classList.contains("show-items")) {
-                      items.classList.remove("show-items");
-                      items.classList.add("hide-items");
-                    } else if (items.classList.contains("hide-items")) {
-                      items.classList.remove("hide-items");
-                      items.classList.add("show-items");
-                    }
+                    document.getElementById("pizzas").classList.toggle("hide-items");
                     var angle = document.getElementById("pizza-down");
-                    if (angle.classList.contains("fa-angle-up")) {
-                      angle.classList.remove("fa-angle-up");
+                    if (angle.classList.contains("fa-angle-right")) {
+                      angle.classList.remove("fa-angle-right");
                       angle.classList.add("fa-angle-down");
                     } else if (angle.classList.contains("fa-angle-down")) {
                       angle.classList.remove("fa-angle-down");
-                      angle.classList.add("fa-angle-up");
+                      angle.classList.add("fa-angle-right");
                     }
                   }}
                 >
                   <p className="m-0">Pizza</p>
                   <i
                     id="pizza-down"
-                    className="fa-solid fa-angle-up ms-1 mt-1"
+                    className="fa-solid fa-angle-down ms-1 mt-1"
                   ></i>
                 </div>
                 <div id="pizzas" className="show-items">
@@ -79,19 +72,19 @@ export default function Menuscreen() {
                       .getElementById("pastas")
                       .classList.toggle("hide-items");
                     var angle = document.getElementById("pasta-down");
-                    if (angle.classList.contains("fa-angle-up")) {
-                      angle.classList.remove("fa-angle-up");
+                    if (angle.classList.contains("fa-angle-right")) {
+                      angle.classList.remove("fa-angle-right");
                       angle.classList.add("fa-angle-down");
                     } else if (angle.classList.contains("fa-angle-down")) {
                       angle.classList.remove("fa-angle-down");
-                      angle.classList.add("fa-angle-up");
+                      angle.classList.add("fa-angle-right");
                     }
                   }}
                 >
                   <p className="m-0">Pasta</p>
                   <i
                     id="pasta-down"
-                    className="fa-solid fa-angle-down ms-1 mt-1"
+                    className="fa-solid fa-angle-right ms-1 mt-1"
                   ></i>
                 </div>
                 <div id="pastas" className="show-items hide-items">
@@ -118,19 +111,19 @@ export default function Menuscreen() {
                       .getElementById("sandwiches")
                       .classList.toggle("hide-items");
                     var angle = document.getElementById("sand-down");
-                    if (angle.classList.contains("fa-angle-up")) {
-                      angle.classList.remove("fa-angle-up");
+                    if (angle.classList.contains("fa-angle-right")) {
+                      angle.classList.remove("fa-angle-right");
                       angle.classList.add("fa-angle-down");
                     } else if (angle.classList.contains("fa-angle-down")) {
                       angle.classList.remove("fa-angle-down");
-                      angle.classList.add("fa-angle-up");
+                      angle.classList.add("fa-angle-right");
                     }
                   }}
                 >
                   <p className="m-0">Sandwich</p>
                   <i
                     id="sand-down"
-                    className="fa-solid fa-angle-down ms-1 mt-1"
+                    className="fa-solid fa-angle-right ms-1 mt-1"
                   ></i>
                 </div>
                 <div id="sandwiches" className="show-items hide-items">
@@ -157,19 +150,19 @@ export default function Menuscreen() {
                       .getElementById("extras")
                       .classList.toggle("hide-items");
                     var angle = document.getElementById("extra-down");
-                    if (angle.classList.contains("fa-angle-up")) {
-                      angle.classList.remove("fa-angle-up");
+                    if (angle.classList.contains("fa-angle-right")) {
+                      angle.classList.remove("fa-angle-right");
                       angle.classList.add("fa-angle-down");
                     } else if (angle.classList.contains("fa-angle-down")) {
                       angle.classList.remove("fa-angle-down");
-                      angle.classList.add("fa-angle-up");
+                      angle.classList.add("fa-angle-right");
                     }
                   }}
                 >
                   <p className="m-0">Extra</p>
                   <i
                     id="extra-down"
-                    className="fa-solid fa-angle-down ms-1 mt-1"
+                    className="fa-solid fa-angle-right ms-1 mt-1"
                   ></i>
                 </div>
                 <div id="extras" className="show-items hide-items">
@@ -194,5 +187,6 @@ export default function Menuscreen() {
       </div>
       <Cart />
     </div>
+    
   );
-}
+};

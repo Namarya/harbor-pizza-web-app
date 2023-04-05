@@ -15,27 +15,33 @@ export const placeOrder = (token, total) => async (dispatch, getState) => {
     dispatch({ type: "PLACE_ORDER_SUCCESS" });
     // console.log(response)
   } catch (error) {
-    dispatch({ type: "PLACE_ORDER_FAILED" });
-    console.log(error);
+    dispatch({
+      type: "PLACE_ORDER_FAILED",
+      payload: error.response.data.message,
+    });
   }
 };
 
-export const placeGuestOrder=(token, total)=> async (dispatch, getState)=>{
-
-  dispatch({type: 'PLACE_ORDER_REQUEST'})
-  const cartItems = getState().cartReducer.cartItems
+export const placeGuestOrder = (token, total) => async (dispatch, getState) => {
+  dispatch({ type: "PLACE_ORDER_REQUEST" });
+  const cartItems = getState().cartReducer.cartItems;
 
   try {
-      
-      // eslint-disable-next-line no-unused-vars
-      const response = await axiosIsntance.post('/api/orders/placeguestorder', {token, total, cartItems})
-      dispatch({type: 'PLACE_ORDER_SUCCESS'})
-      // console.log(response)
+    // eslint-disable-next-line no-unused-vars
+    const response = await axiosIsntance.post("/api/orders/placeguestorder", {
+      token,
+      total,
+      cartItems,
+    });
+    dispatch({ type: "PLACE_ORDER_SUCCESS" });
+    // console.log(response)
   } catch (error) {
-      dispatch({type: 'PLACE_ORDER_FAILED'})
-      console.log(error)
+    dispatch({
+      type: "PLACE_ORDER_FAILED",
+      payload: error.response.data.message,
+    });
   }
-}
+};
 
 export const getUserOrders = () => async (dispatch, getState) => {
   const currentUser = getState().loginUserReducer.currentUser;

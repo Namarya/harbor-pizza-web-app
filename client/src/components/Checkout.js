@@ -39,8 +39,11 @@ export default function Checkout({ total }) {
   return (
     <div>
       {loading && <Loading />}
-      {error && <Error error="Something went wrong" />}
-
+      {error && (
+        <Error
+          error={"Sorry, " + error.substring(7, error.length).toLowerCase()}
+        />
+      )}
       {success && (
         <div>
           <Success success="Your order was placed successfully" />
