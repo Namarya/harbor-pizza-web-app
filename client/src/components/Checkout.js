@@ -41,7 +41,7 @@ export default function Checkout({ total }) {
       {loading && <Loading />}
       {error && (
         <Error
-          error={"Sorry, " + error.substring(7, error.length).toLowerCase()}
+        error={""+error.substring(7, error.length)}
         />
       )}
       {success && (
