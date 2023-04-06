@@ -66,7 +66,11 @@ img {
   background-color: #a72222 !important;
   border: solid 1px #000 !important;
 }
-
+.orderBtn:hover {
+  color: #a72222 !important;
+  background-color: #fff !important;
+  border: solid 2px #a72222 !important;
+}
 select {
   box-shadow: none !important;
   border-color: black !important;

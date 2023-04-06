@@ -25,7 +25,7 @@ export default function StoreInfo() {
               className="mt-1 mb-1 p-2 rounded d-flex justify-content-between"
             >
               <span className="day">Monday</span>{" "}
-              <span className="time">12:00PM - 9:30PM</span>
+              <span className="time">1:00PM - 9:30PM</span>
             </p>
             <p
               style={{ backgroundColor: "rgba(150,150,150,.2)" }}
@@ -39,21 +39,21 @@ export default function StoreInfo() {
               className="mt-1 mb-1 p-2 rounded d-flex justify-content-between"
             >
               <span className="day">Wednesday</span>{" "}
-              <span className="time">12:00PM - 9:30PM</span>
+              <span className="time">1:00PM - 9:30PM</span>
             </p>
             <p
               style={{ backgroundColor: "rgba(150,150,150,.2)" }}
               className="mt-1 mb-1 p-2 rounded d-flex justify-content-between"
             >
               <span className="day">Thursday</span>{" "}
-              <span className="time">12:00PM - 9:30PM</span>
+              <span className="time">1:00PM - 9:30PM</span>
             </p>
             <p
               style={{ backgroundColor: "rgba(150,150,150,.2)" }}
               className="mt-1 mb-1 p-2 rounded d-flex justify-content-between"
             >
               <span className="day">Friday</span>{" "}
-              <span className="time">12:00PM - 9:30PM</span>
+              <span className="time">1:00PM - 9:30PM</span>
             </p>
             <p
               style={{ backgroundColor: "rgba(150,150,150,.2)" }}
@@ -61,7 +61,7 @@ export default function StoreInfo() {
               id="sat"
             >
               <span className="day">Saturday</span>{" "}
-              <span className="time">12:00PM - 9:30PM</span>
+              <span className="time">1:00PM - 9:30PM</span>
             </p>
           </div>
         </div>
