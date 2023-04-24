@@ -28,9 +28,7 @@ function orderConfirmationGuestEmail(order) {
     const info = await transporter.sendMail({
       from: "Harbor Pizza <harborpizza@outlook.com>",
       to: order.email,
-      subject: `Order Confirmation (${JSON.stringify(
-        ordernumber
-      ).toUpperCase()})`,
+      subject: `Order Confirmation ${ordernumber}`,
       html: `
 
       <h2>Dear ${order.name},</h2>

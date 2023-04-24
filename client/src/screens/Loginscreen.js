@@ -55,7 +55,7 @@ export default function Loginscreen() {
 
           {loading && <Loading />}
           {error && <Error error="Invalid Credentials" />}
-          {success && <Success success="Login Successfull" />}
+          {success && <Success success="Login Successful" />}
           <div>
             <input
               type="email"

@@ -29,7 +29,7 @@ export default function Successscreen() {
         </div>
         {currentUser && (
           <div className="p-1">
-            <a className="text-decoration-none fa-beat" href="/orders">
+            <a className="text-decoration-none" href="/orders">
               View Order
             </a>
           </div>
