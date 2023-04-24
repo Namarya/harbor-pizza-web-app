@@ -183,7 +183,7 @@ function orderReadyEmail(order) {
     const info = await transporter.sendMail({
       from: "Harbor Pizza <harborpizza@outlook.com>",
       to: order.email,
-      subject: `Order Is Ready! (${capitalize(ordernumber)})`,
+      subject: `Order Is Ready! ${capitalize(ordernumber)}`,
       html: `
 
       <h2>Dear Customer,</h2>
