@@ -102,21 +102,12 @@ export default function Pizza({ pizza }) {
             Price: ${(pizza.prices[0][size] * quantity).toFixed(2)}
           </h2>
         </div>
-        {pizza.category.includes("custom") ? (
-          <div className="m-1 w-100">
-            <div>
-              <a href="/byop">
-                <button className="btn">Build Now</button>
-              </a>
-            </div>
+
+        <div className="m-1 w-100">
+          <div onClick={addtocart}>
+            <AddToCartBtn />
           </div>
-        ) : (
-          <div className="m-1 w-100">
-            <div onClick={addtocart}>
-              <AddToCartBtn />
-            </div>
-          </div>
-        )}
+        </div>
       </div>
 
       <Modal show={show}>

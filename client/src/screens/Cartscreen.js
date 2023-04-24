@@ -6,7 +6,7 @@ import Checkout from "../components/Checkout";
 export default function Cartscreen() {
   const cartState = useSelector((state) => state.cartReducer);
   const cartItems = cartState.cartItems;
-  var gardenGroveTaxRate = 0.0875;
+  var gardenGroveTaxRate = 0.0725;
   var subtotal = cartItems.reduce((x, item) => x + item.price, 0);
   var tax = subtotal * gardenGroveTaxRate;
   var tmp = subtotal + tax;
@@ -115,7 +115,13 @@ export default function Cartscreen() {
                   Tax: ${tax.toFixed(2)}
                 </p>
                 <h5>Order Total: ${total.toFixed(2)}</h5>
-                <Checkout total={total} />
+                
+                <div className="ch d-flex flex-wrap justify-content-evenly">
+                <Checkout/>
+                <a href="/menu">
+                  <button className="rounded alt-btn" style={{width:"15rem"}}> <i className="fa-solid fa-caret-left fa-beat mx-1"></i>Back To Menu</button>
+                </a>
+                </div>
               </div>
             </div>
           ) : (
@@ -148,7 +154,7 @@ export default function Cartscreen() {
               </p>
               <a href="/menu">
                 <button className="btn">
-                  <i className="fa-solid fa-cart-shopping me-1"></i>GO TO MENU
+                  <i className="fa-solid fa-caret-left fa-bounce me-1"></i><span>GO TO MENU</span>
                 </button>
               </a>
             </div>

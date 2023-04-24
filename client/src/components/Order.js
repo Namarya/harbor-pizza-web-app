@@ -1,4 +1,5 @@
 import React from "react";
+import ReadyForPickupButton from "./ReadyForPickupButton";
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -23,7 +24,7 @@ const getPST = (time) => {
   return pstDate;
 };
 
-export default function Orders({ orders }) {
+export default function Order({ orders }) {
   return orders.map((order) => {
     return (
       <div className="order rounded shadow-lg" key={order._id}>
@@ -90,18 +91,13 @@ export default function Orders({ orders }) {
             <hr />
             <span>
               {" "}
-              <b>Status: </b>Ready For Pickup{" "}
+              <b>Status:</b> Ready For Pickup!{" "}
               <i className="fa-solid fa-square-check fa-bounce"></i>
             </span>
           </div>
         ) : (
-          <div>
-            <hr />
-            <span>
-              {" "}
-              <b>Status: </b>In Progress{" "}
-              <i class="fa-solid fa-arrow-rotate-right fa-spin"></i>
-            </span>
+          <div className="text-center mt-4">
+            <ReadyForPickupButton orderId={order._id} />
           </div>
         )}
       </div>

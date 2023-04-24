@@ -406,9 +406,9 @@ router.post("/placeguestorder", async (req, res) => {
 });
 
 router.post("/getuserorders", async (req, res) => {
-  const { userid } = req.body;
+  const { email } = req.body;
   try {
-    const orders = await Order.find({ userid: userid }).sort({ _id: -1 });
+    const orders = await Order.find({ email: email }).sort({ _id: -1 });
     res.send(orders);
   } catch (error) {
     return res.status(400).json({ message: "Something went wrong" + error });

@@ -13,7 +13,6 @@ import Orderscreen from "./screens/Orderscreen";
 import Footer from "./components/Footer";
 import Dashboard from "./screens/Dashboard";
 import Successscreen from "./screens/Successscreen";
-import PizzaBuilderScreen from "./screens/PizzaBuilderScreen";
 
 function App() {
   return (
@@ -29,8 +28,6 @@ function App() {
           <Route path="/orders" element={<Orderscreen />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/success" element={<Successscreen />} />
-          <Route path="/byop" element={<PizzaBuilderScreen />} />
-
         </Routes>
       </BrowserRouter>
       <Footer />

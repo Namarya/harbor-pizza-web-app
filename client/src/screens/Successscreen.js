@@ -1,6 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function Successscreen() {
+  localStorage.removeItem("cartItems");
+  const userstate = useSelector((state) => state.loginUserReducer);
+  const { currentUser } = userstate;
+
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -22,6 +27,13 @@ export default function Successscreen() {
             with details about your order.{" "}
           </p>
         </div>
+        {currentUser && (
+          <div className="p-1">
+            <a className="text-decoration-none fa-beat" href="/orders">
+              View Order
+            </a>
+          </div>
+        )}
         <hr />
         <div>
           <p style={{ fontSize: ".8rem" }}>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../actions/orderActions";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
-import Orders from "../components/Orders";
+import Order from "../components/Order";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -19,26 +19,20 @@ export default function Dashboard() {
     dispatch(getAllOrders());
     setInterval(() => {
       dispatch(getAllOrders());
-    }, 10000);
+    }, 5000);
   }, [currentUser, dispatch]);
 
   return (
-    <div style={{ marginTop: "3rem", backgroundColor: "#fff" }}>
-      <div style={{ padding: "1rem 0rem 0rem 0rem" }}>
-        <h2 style={{ fontWeight: "bold", marginBottom: "0px" }}>Dashboard</h2>
+    <div style={{ backgroundColor: "#fff" }}>
+      <div className="bg-img" style={{ marginTop: "3rem" }}>
+        <h1 className="welcome">DASHBOARD</h1>
       </div>
       <div
-        className="row"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+      className="d-flex flex-column align-items-center"
       >
         {loading && <Loading />}
         {error && <Error error="Something went wrong" />}
-        {orders && <Orders orders={orders} />}
+        {orders && <Order orders={orders} />}
       </div>
     </div>
   );

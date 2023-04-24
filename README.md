@@ -4,6 +4,7 @@
 
 - Browse Menu
 - Order / Pay Online
+- Apple and Google Pay
 - Contact Harbor Pizza
 - Send Order details to Harbor Pizza
 - View Order Progress

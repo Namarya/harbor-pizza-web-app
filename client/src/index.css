@@ -112,7 +112,7 @@ i:hover {
   background-size: cover !important;
   background-position: center center !important;
   background-image: url(./imgs/cover-photo.png) !important;
-  height: 20rem !important;
+  height: 15rem !important;
   place-items: center !important;
   color: white !important;
 }
@@ -136,6 +136,16 @@ i:hover {
 }
 .hide-items {
   display: none;
+}
+@media only screen and (min-width: 608px) {
+  .order {
+    width: 35rem;
+  }
+}
+@media only screen and (max-width: 608px) {
+  .ch {
+    gap: 1rem;
+  }
 }
 @media only screen and (max-width: 480px) {
   .orderBtn {
@@ -178,6 +188,19 @@ i:hover {
 .nav-cart {
   top: 0.05rem;
   right: 0.25rem;
+}
+.order {
+  text-align: start;
+  padding: 2rem;
+  min-width: 25rem !important;
+  margin: 2rem;
+}
+.orderitems {
+  display: flex;
+  justify-content: space-between;
+}
+.on {
+  font-size: 1.6rem;
 }
 @media only screen and (max-width: 990px) {
   .nav-cart {

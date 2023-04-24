@@ -50,7 +50,7 @@ export const getUserOrders = () => async (dispatch, getState) => {
 
   try {
     const response = await axiosIsntance.post("/api/orders/getuserorders", {
-      userid: currentUser._id,
+      email: currentUser.email,
     });
     // console.log(response)
     dispatch({ type: "GET_USER_ORDERS_SUCCESS", payload: response.data });
