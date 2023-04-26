@@ -85,6 +85,14 @@ export default function Order({ orders }) {
               })}
             </div>
           </div>
+          <div className="text-center">
+            <div>
+              <b>Price</b>
+              {order.orderItems[0].prices.map((i) => {
+                return <div>{i}</div>;
+              })}
+            </div>
+          </div>
         </div>
         {order.readyForPickup ? (
           <div>

@@ -35,14 +35,14 @@ router.post("/create-checkout-session", async (req, res) => {
       tax_rates: [taxRate.id],
     };
   });
-  const Itemdata = req.body.cartItems.map((item) => {
+  const Itemsizedata = req.body.cartItems.map((item) => {
     const size = JSON.stringify(item.size);
     return {
       size,
     };
   });
 
-  const sizeString = Itemdata.map((item) => item.size).join(",");
+  const sizeString = Itemsizedata.map((item) => item.size).join(",");
 
   const Itemnamedata = req.body.cartItems.map((item) => {
     const name = JSON.stringify(item.name);
@@ -61,7 +61,16 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const qtyString = Itemqtydata.map((item) => item.quantity).join(",");
+  
+  const Itempricedata = req.body.cartItems.map((item) => {
+    const price = JSON.stringify(item.price);
+    return {
+      price,
+    };
+  });
 
+  const priceString = Itempricedata.map((item) => item.price).join(",");
+  
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items,
@@ -75,6 +84,7 @@ router.post("/create-checkout-session", async (req, res) => {
       items: nameString,
       sizes: sizeString,
       quantity: qtyString,
+      prices: priceString,
     },
   });
   res.send({ url: session.url });

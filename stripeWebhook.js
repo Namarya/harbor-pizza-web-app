@@ -4,6 +4,7 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const router = express.Router();
 const Order = require("./models/orderModel");
 const nodeMailer = require("nodemailer");
+
 // Send guest an email that the order was received and include their order number and details
 function orderConfirmationGuestEmail(order) {
   const temp = JSON.stringify(order._id);
@@ -45,11 +46,17 @@ function orderConfirmationGuestEmail(order) {
         <div style="display:flex; justify-content:space-evenly;">
           <div><b>Items</b>${order.orderItems[0].name
             .map((item) => {
-              return `<div>${item.toLowerCase()}</div>`;
+              return `<div>${item.toUpperCase()}</div>`;
             })
             .join("")}
           </div>
           <div style="margin-left: 1.2rem;"><b>Qty</b>${order.orderItems[0].quantity
+            .map((item) => {
+              return `<div>${item}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${order.orderItems[0].prices
             .map((item) => {
               return `<div>${item}</div>`;
             })
@@ -75,6 +82,63 @@ function orderConfirmationGuestEmail(order) {
 
   main().catch((e) => console.log(e));
 }
+// Send an email to harborpizza@outlook.com when a new order is placed
+function sendOrderEmailUpdate(order) {
+  const temp = JSON.stringify(order._id);
+  const ordernumber = temp
+    .substring(temp.length - 11, temp.length - 1)
+    .toUpperCase();
+
+  async function main() {
+    const transporter = nodeMailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "harborpizza@outlook.com",
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+    const info = await transporter.sendMail({
+      from: "Harbor Pizza <harborpizza@outlook.com>",
+      to: "harborpizza@outlook.com",
+      subject: "New Order!",
+      html: `<h2>Order # ${ordernumber}</h2>
+              <div>
+                <p>Customer Name: ${order.name}</p>
+                <p>Customer Email: ${order.email}</p>
+                <p> Customer Phone #: ${order.phoneNumber}</p>
+              </div>
+              <br>
+              <div style="display:flex; justify-content:space-evenly;">
+          <div><b>Items</b>${order.orderItems[0].name
+            .map((item) => {
+              return `<div>${item.toUpperCase()}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Qty</b>${order.orderItems[0].quantity
+            .map((item) => {
+              return `<div>${item}</div>`;
+            })
+            .join("")}
+          </div>  
+          <div style="margin-left: 1.2rem;"><b>Size</b>${order.orderItems[0].sizes
+            .map((item) => {
+              return `<div>${item}</div>`;
+            })
+            .join("")}
+          </div>
+          <div style="margin-left: 1.2rem;"><b>Price</b>${order.orderItems[0].prices
+            .map((item) => {
+              return `<div>${item}</div>`;
+            })
+            .join("")}
+          </div>         
+        </div>
+        `,
+    });
+  }
+  main().catch((e) => console.log(e));
+}
 function createOrder(
   name,
   email,
@@ -82,16 +146,19 @@ function createOrder(
   itemName,
   itemSizes,
   quantity,
+  itemPrices,
   orderAmount,
   id
 ) {
   items = itemName.split(",").map((item) => item.replace(/"/g, "").trim());
   sizes = itemSizes.split(",").map((item) => item.replace(/"/g, "").trim());
+  prices = itemPrices.split(",").map((item) => item.trim());
   itemqty = quantity.split(",").map((item) => item.trim());
   const orderItems = {
     name: items,
     sizes: sizes,
     quantity: itemqty,
+    prices : prices,
   };
   const neworder = new Order({
     name: name,
@@ -105,6 +172,9 @@ function createOrder(
   console.log("New order saved: " + JSON.stringify(neworder));
   neworder.save();
   orderConfirmationGuestEmail(neworder);
+  setTimeout(() => {
+    sendOrderEmailUpdate(neworder);
+  }, 1000);
 }
 router.post(
   "/webhook",
@@ -155,17 +225,14 @@ router.post(
       case "checkout.session.completed":
         const session = data;
         const customer_email = session.customer_details.email;
-
         const customer_name = session.customer_details.name;
-
         const customer_phone = session.customer_details.phone;
-
         const totalAmount = session.amount_total;
-
-        // Access metadata values
+// Access info from the metadata
         const sizes = session.metadata.sizes;
         const items = session.metadata.items;
         const quantity = session.metadata.quantity;
+        const prices = session.metadata.prices
         // Wait until payment_intent.succeeded event is handled and paymentIntentId is set
         await new Promise((resolve) => {
           const intervalId = setInterval(() => {
@@ -183,12 +250,12 @@ router.post(
           items,
           sizes,
           quantity,
+          prices,
           totalAmount,
           paymentIntentId
         );
         break;
       default:
-      // handle other event types
     }
 
     // Return a 200 response to acknowledge receipt of the event

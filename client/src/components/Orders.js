@@ -66,20 +66,16 @@ export default function Orders({ orders }) {
           </div>
           <div className="text-center">
             <div>
-              <b>Size</b>
-              {order.orderItems[0].sizes.map((i) => {
-                if (i.includes("extra")) i = "XL";
-                else if (i.includes("large")) i = "LG";
-                else if (i.includes("small")) i = "SM";
-
+              <b>Qty</b>
+              {order.orderItems[0].quantity.map((i) => {
                 return <div>{i}</div>;
               })}
             </div>
           </div>
           <div className="text-center">
             <div>
-              <b>Qty</b>
-              {order.orderItems[0].quantity.map((i) => {
+              <b>Price</b>
+              {order.orderItems[0].prices.map((i) => {
                 return <div>{i}</div>;
               })}
             </div>
