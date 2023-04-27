@@ -50,6 +50,24 @@ function orderConfirmationGuestEmail(order) {
             })
             .join("")}
           </div>
+          <div style="margin-left: 1.2rem;"><b>Size</b>${order.orderItems[0].sizes
+            .map((item) => {
+              if (item.includes("extra")) {
+                item = "XL";
+                return `<div>${item}</div>`;
+              } else if (item.includes("large")) {
+                item = "LG";
+                return `<div>${item}</div>`;
+              } else if (item.includes("small")) {
+                item = "SM";
+                return `<div>${item}</div>`;
+              } else
+                return `<div>
+                    <br />
+                  </div>`;
+            })
+            .join("")}
+          </div>
           <div style="margin-left: 1.2rem;"><b>Qty</b>${order.orderItems[0].quantity
             .map((item) => {
               return `<div>${item}</div>`;
@@ -114,19 +132,31 @@ function sendOrderEmailUpdate(order) {
               return `<div>${item.toUpperCase()}</div>`;
             })
             .join("")}
+          </div> 
+          <div style="margin-left: 1.2rem;"><b>Size</b>${order.orderItems[0].sizes
+            .map((item) => {
+              if (item.includes("extra")) {
+                item = "XL";
+                return `<div>${item}</div>`;
+              } else if (item.includes("large")) {
+                item = "LG";
+                return `<div>${item}</div>`;
+              } else if (item.includes("small")) {
+                item = "SM";
+                return `<div>${item}</div>`;
+              } else
+                return `<div>
+                    <br />
+                  </div>`;
+            })
+            .join("")}
           </div>
           <div style="margin-left: 1.2rem;"><b>Qty</b>${order.orderItems[0].quantity
             .map((item) => {
               return `<div>${item}</div>`;
             })
             .join("")}
-          </div>  
-          <div style="margin-left: 1.2rem;"><b>Size</b>${order.orderItems[0].sizes
-            .map((item) => {
-              return `<div>${item}</div>`;
-            })
-            .join("")}
-          </div>
+          </div> 
           <div style="margin-left: 1.2rem;"><b>Price</b>${order.orderItems[0].prices
             .map((item) => {
               return `<div>${item}</div>`;
@@ -158,7 +188,7 @@ function createOrder(
     name: items,
     sizes: sizes,
     quantity: itemqty,
-    prices : prices,
+    prices: prices,
   };
   const neworder = new Order({
     name: name,
@@ -228,11 +258,11 @@ router.post(
         const customer_name = session.customer_details.name;
         const customer_phone = session.customer_details.phone;
         const totalAmount = session.amount_total;
-// Access info from the metadata
+        // Access info from the metadata
         const sizes = session.metadata.sizes;
         const items = session.metadata.items;
         const quantity = session.metadata.quantity;
-        const prices = session.metadata.prices
+        const prices = session.metadata.prices;
         // Wait until payment_intent.succeeded event is handled and paymentIntentId is set
         await new Promise((resolve) => {
           const intervalId = setInterval(() => {

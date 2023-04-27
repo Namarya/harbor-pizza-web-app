@@ -186,7 +186,7 @@ function orderReadyEmail(order) {
       subject: `Order Is Ready! ${ordernumber}`,
       html: `
 
-      <h2>Dear Customer,</h2>
+      <h2>Dear ${order.name},</h2>
       <p>Thank you for ordering at harborpizza.app! Order <b>${ordernumber}</b> is now ready for pickup!</p>
 
       <br>

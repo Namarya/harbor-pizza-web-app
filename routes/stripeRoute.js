@@ -36,7 +36,10 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
   const Itemsizedata = req.body.cartItems.map((item) => {
-    const size = JSON.stringify(item.size);
+    let size;
+    if (item.name.includes("PIZZA")) {
+      size = JSON.stringify(item.size);
+    } else size = '"  "';
     return {
       size,
     };
@@ -61,7 +64,7 @@ router.post("/create-checkout-session", async (req, res) => {
   });
 
   const qtyString = Itemqtydata.map((item) => item.quantity).join(",");
-  
+
   const Itempricedata = req.body.cartItems.map((item) => {
     const price = JSON.stringify(item.price);
     return {
@@ -69,8 +72,10 @@ router.post("/create-checkout-session", async (req, res) => {
     };
   });
 
-  const priceString = Itempricedata.map((item) => item.price).join(",");
-  
+  const priceString = Itempricedata.map((item) =>
+    Number(item.price).toFixed(2)
+  ).join(",");
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items,

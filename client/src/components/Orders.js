@@ -60,7 +60,29 @@ export default function Orders({ orders }) {
             <div>
               <b>Items</b>
               {order.orderItems[0].name.map((i) => {
-                return <div>{i}</div>;
+                return <div className="smfont">{i}</div>;
+              })}
+            </div>
+          </div>
+          <div className="text-center">
+            <div>
+              <b>Size</b>
+              {order.orderItems[0].sizes.map((i) => {
+                if (i.includes("extra")) {
+                  i = "XL";
+                  return <div className="smfont">{i}</div>;
+                } else if (i.includes("large")) {
+                  i = "LG";
+                  return <div className="smfont">{i}</div>;
+                } else if (i.includes("small")) {
+                  i = "SM";
+                  return <div className="smfont">{i}</div>;
+                } else
+                  return (
+                    <div className="smfont">
+                      <br />
+                    </div>
+                  );
               })}
             </div>
           </div>
@@ -68,7 +90,7 @@ export default function Orders({ orders }) {
             <div>
               <b>Qty</b>
               {order.orderItems[0].quantity.map((i) => {
-                return <div>{i}</div>;
+                return <div className="smfont">{i}</div>;
               })}
             </div>
           </div>
@@ -76,7 +98,7 @@ export default function Orders({ orders }) {
             <div>
               <b>Price</b>
               {order.orderItems[0].prices.map((i) => {
-                return <div>{i}</div>;
+                return <div className="smfont">{Number(i).toFixed(2)}</div>;
               })}
             </div>
           </div>
