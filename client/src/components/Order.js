@@ -99,7 +99,7 @@ export default function Order({ orders }) {
             <div>
               <b>Price</b>
               {order.orderItems[0].prices.map((i) => {
-                return <div className="smfont">{Number(i).toFixed(2)}</div>;
+                return <div className="smfont">${Number(i).toFixed(2)}</div>;
               })}
             </div>
           </div>
