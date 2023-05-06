@@ -21,30 +21,30 @@
 ## Screenshots
 
 ### Home Page
-![](client/src/imgs/siteImgs/Home%20(1).png)
-![](client/src/imgs/siteImgs/Home%20(2).png)
+<img src="client/src/imgs/siteImgs/Home%20(1).png" width="640" height="360" />
+<img src="client/src/imgs/siteImgs/Home%20(2).png" width="640" height="360" />
 
 ### Menu Page
-![](client/src/imgs/siteImgs/menu.png)
+<img src="client/src/imgs/siteImgs/menu.png" width="640" height="360" />
 
 ### Cart 
-![](client/src/imgs/siteImgs/cart.png)
+<img src="client/src/imgs/siteImgs/cart.png" width="640" height="360" />
 
 ### Checkout
-![](client/src/imgs/siteImgs/Checkout.png)
-![](client/src/imgs/siteImgs/Checkout.jpg)
+<img src="client/src/imgs/siteImgs/Checkout.png" width="640" height="360" />
+<img src="client/src/imgs/siteImgs/Checkout.jpg" width="640" height="360" />
 
 ### Order Placed Successfully
-![](client/src/imgs/siteImgs/Order%20(1).png)
+<img src="client/src/imgs/siteImgs/Order%20(1).png" width="640" height="360" />
 
 ### Orders Page
-![](client/src/imgs/siteImgs/Order%20(2).png)
+<img src="client/src/imgs/siteImgs/Order%20(2).png" width="640" height="360" />
 
 ### Dashboard Page
-![](client/src/imgs/siteImgs/Dashboard.png)
+<img src="client/src/imgs/siteImgs/Dashboard.png" width="640" height="360" />
 
 ### Login & Register Pages
-![](client/src/imgs/siteImgs/login.png)
-![](client/src/imgs/siteImgs/register.png)
+<img src="client/src/imgs/siteImgs/login.png" width="640" height="360" />
+<img src="client/src/imgs/siteImgs/register.png" width="640" height="360" />
 
-### [Check it out](https://www.harborpizza.app/)
+## [Check it out - harborpizza.app](https://www.harborpizza.app/)
