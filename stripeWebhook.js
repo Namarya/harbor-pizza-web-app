@@ -76,7 +76,7 @@ function orderConfirmationGuestEmail(order) {
           </div>
           <div style="margin-left: 1.2rem;"><b>Price</b>${order.orderItems[0].prices
             .map((item) => {
-              return `<div>${item}</div>`;
+              return `<div>$${item}</div>`;
             })
             .join("")}
           </div>
@@ -159,7 +159,7 @@ function sendOrderEmailUpdate(order) {
           </div> 
           <div style="margin-left: 1.2rem;"><b>Price</b>${order.orderItems[0].prices
             .map((item) => {
-              return `<div>${item}</div>`;
+              return `<div>$${item}</div>`;
             })
             .join("")}
           </div>         

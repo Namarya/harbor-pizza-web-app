@@ -61,7 +61,7 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("not a pizza");
+                      return console.log("");
                     }
                   })}
                 </div>
@@ -100,7 +100,7 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("not a pasta");
+                      return console.log("");
                     }
                   })}
                 </div>
@@ -178,7 +178,7 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("not an extra");
+                      return console.log("");
                     }
                   })}
                 </div>
