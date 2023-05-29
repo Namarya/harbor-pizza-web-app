@@ -6,7 +6,7 @@ import supreme from "../imgs/Supreme.jpg";
 import pepperoni from "../imgs/pep-pizza.png";
 export default function Slideshow() {
   return (
-    <div className="d-flex justify-content-center bfbfb">
+    <div className="d-flex justify-content-center bg-light p-3 rounded bfbfb">
       <div
         id="carouselExampleCaptions"
         className="carousel slide"

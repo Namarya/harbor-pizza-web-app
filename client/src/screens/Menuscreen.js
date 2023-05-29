@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPizzas } from "../actions/pizzaActions.js";
 import Loading from "../components/Loading.js";
@@ -13,7 +13,23 @@ export default function Menuscreen() {
   useEffect(() => {
     dispatch(getAllPizzas());
   }, [dispatch]);
+  const [isPastaVisible, setPastaVisible] = useState(false);
+  const [isPizzaVisible, setPizzaVisible] = useState(false);
+  const [isSandwichVisible, setSandwichVisible] = useState(false);
+  const [isExtraVisible, setExtraVisible] = useState(false);
 
+  const togglePasta = () => {
+    setPastaVisible(!isPastaVisible);
+  };
+  const togglePizza = () => {
+    setPizzaVisible(!isPizzaVisible);
+  };
+  const toggleSandwich = () => {
+    setSandwichVisible(!isSandwichVisible);
+  };
+  const toggleExtra = () => {
+    setExtraVisible(!isExtraVisible);
+  };
   return (
     <div id="top">
       <div className="bg-img" style={{ marginTop: "3rem" }}>
@@ -28,29 +44,19 @@ export default function Menuscreen() {
           ) : (
             <div>
               <div className="d-flex flex-column align-items-center bg-white">
-                <div
-                  className="header"
-                  onClick={() => {
-                    document
-                      .getElementById("pizzas")
-                      .classList.toggle("hide-items");
-                    var angle = document.getElementById("pizza-down");
-                    if (angle.classList.contains("fa-caret-right")) {
-                      angle.classList.remove("fa-caret-right");
-                      angle.classList.add("fa-caret-down");
-                    } else if (angle.classList.contains("fa-caret-down")) {
-                      angle.classList.remove("fa-caret-down");
-                      angle.classList.add("fa-caret-right");
-                    }
-                  }}
-                >
+                <div className="header" onClick={togglePizza}>
                   <p className="m-0">Pizza</p>
                   <i
                     id="pizza-down"
-                    className="fa-solid fa-caret-down ms-1 mt-1"
+                    className={`fa-solid fa-caret-right ms-1 mt-1 ${
+                      isPizzaVisible ? "rotate-down" : ""
+                    }`}
                   ></i>
                 </div>
-                <div id="pizzas" className="show-items">
+                <div
+                  id="pizzas"
+                  className={isPizzaVisible ? "show-items" : "hide-items"}
+                >
                   {pizzas.map((pizza) => {
                     if (pizza.category.includes("pizza")) {
                       return (
@@ -61,35 +67,25 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("");
+                      return null;
                     }
                   })}
                 </div>
               </div>
               <div className=" d-flex flex-column align-items-center bg-white">
-                <div
-                  className="header"
-                  onClick={() => {
-                    document
-                      .getElementById("pastas")
-                      .classList.toggle("hide-items");
-                    var angle = document.getElementById("pasta-down");
-                    if (angle.classList.contains("fa-caret-right")) {
-                      angle.classList.remove("fa-caret-right");
-                      angle.classList.add("fa-caret-down");
-                    } else if (angle.classList.contains("fa-caret-down")) {
-                      angle.classList.remove("fa-caret-down");
-                      angle.classList.add("fa-caret-right");
-                    }
-                  }}
-                >
+                <div className="header" onClick={togglePasta}>
                   <p className="m-0">Pasta</p>
                   <i
                     id="pasta-down"
-                    className="fa-solid fa-caret-right ms-1 mt-1"
+                    className={`fa-solid fa-caret-right ms-1 mt-1 ${
+                      isPastaVisible ? "rotate-down" : ""
+                    }`}
                   ></i>
                 </div>
-                <div id="pastas" className="show-items hide-items">
+                <div
+                  id="pastas"
+                  className={isPastaVisible ? "show-items" : "hide-items"}
+                >
                   {pizzas.map((pizza) => {
                     if (pizza.category.includes("pasta")) {
                       return (
@@ -100,35 +96,25 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("");
+                      return null;
                     }
                   })}
                 </div>
               </div>
               <div className="d-flex flex-column align-items-center bg-white">
-                <div
-                  className="header"
-                  onClick={() => {
-                    document
-                      .getElementById("sandwiches")
-                      .classList.toggle("hide-items");
-                    var angle = document.getElementById("sand-down");
-                    if (angle.classList.contains("fa-caret-right")) {
-                      angle.classList.remove("fa-caret-right");
-                      angle.classList.add("fa-caret-down");
-                    } else if (angle.classList.contains("fa-caret-down")) {
-                      angle.classList.remove("fa-caret-down");
-                      angle.classList.add("fa-caret-right");
-                    }
-                  }}
-                >
-                  <p className="m-0">Sandwich</p>
+                <div className="header" onClick={toggleSandwich}>
+                  <p className="m-0">Sandwiches</p>
                   <i
                     id="sand-down"
-                    className="fa-solid fa-caret-right ms-1 mt-1"
+                    className={`fa-solid fa-caret-right ms-1 mt-1 ${
+                      isSandwichVisible ? "rotate-down" : ""
+                    }`}
                   ></i>
                 </div>
-                <div id="sandwiches" className="show-items hide-items">
+                <div
+                  id="sandwiches"
+                  className={isSandwichVisible ? "show-items" : "hide-items"}
+                >
                   {pizzas.map((pizza) => {
                     if (pizza.category.includes("sandwich")) {
                       return (
@@ -139,35 +125,25 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("not a sandwich");
+                      return null;
                     }
                   })}
                 </div>
               </div>
               <div className=" d-flex flex-column align-items-center bg-white">
-                <div
-                  className="header"
-                  onClick={() => {
-                    document
-                      .getElementById("extras")
-                      .classList.toggle("hide-items");
-                    var angle = document.getElementById("extra-down");
-                    if (angle.classList.contains("fa-caret-right")) {
-                      angle.classList.remove("fa-caret-right");
-                      angle.classList.add("fa-caret-down");
-                    } else if (angle.classList.contains("fa-caret-down")) {
-                      angle.classList.remove("fa-caret-down");
-                      angle.classList.add("fa-caret-right");
-                    }
-                  }}
-                >
-                  <p className="m-0">Extra</p>
+                <div className="header" onClick={toggleExtra}>
+                  <p className="m-0">Extras</p>
                   <i
                     id="extra-down"
-                    className="fa-solid fa-caret-right ms-1 mt-1"
+                    className={`fa-solid fa-caret-right ms-1 mt-1 ${
+                      isExtraVisible ? "rotate-down" : ""
+                    }`}
                   ></i>
                 </div>
-                <div id="extras" className="show-items hide-items">
+                <div
+                  id="extras"
+                  className={isExtraVisible ? "show-items" : "hide-items"}
+                >
                   {pizzas.map((pizza) => {
                     if (pizza.category.includes("extra")) {
                       return (
@@ -178,7 +154,7 @@ export default function Menuscreen() {
                         </div>
                       );
                     } else {
-                      return console.log("");
+                      return null;
                     }
                   })}
                 </div>

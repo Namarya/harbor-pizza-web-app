@@ -128,14 +128,36 @@ i:hover {
 .header:hover {
   cursor: pointer;
 }
+
 .show-items {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  max-height: 3000px;
   margin-top: 2rem;
+  transition: margin-top 0.5s ease, max-height 1.9s ease;
+  overflow: hidden;
 }
+
 .hide-items {
-  display: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 0;
+  margin-top: 0;
+  transition: margin-top 0.5s ease, max-height 0.5s ease;
+  overflow: hidden;
+}
+.fa-caret-down {
+  transition: transform 0.5s ease;
+}
+
+.fa-caret-right {
+  transition: transform .5s ease;
+}
+
+.rotate-down {
+  transform: rotate(90deg);
 }
 @media only screen and (min-width: 608px) {
   .order {
@@ -146,8 +168,8 @@ i:hover {
   .ch {
     gap: 1rem;
   }
-  .smfont{
-    font-size: .7rem;
+  .smfont {
+    font-size: 0.7rem;
   }
 }
 @media only screen and (max-width: 480px) {
